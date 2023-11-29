@@ -1,14 +1,26 @@
-const http = require("http");
+const express = require("express");
+
 const PORT = 3000;
 
-const server = http.createServer(function listner(request, response) {
-  if (request.url == "/home") {
-    response.end("welcome to home");
-  }
+const app = express();
 
-  console.log("Request received");
+app.get("/home", (request, response) => {
+  response.send("hi there , welcome to get");
 });
 
-server.listen(PORT, function exec() {
-  console.log(`server is up and running on PORT: ${PORT}`);
+app.post("/home", (request, response) => {
+  response.send("hi there , welcome to post");
+});
+app.post("/saravana", (request, response) => {
+  // response.send("hi there , welcome to post");
+  response.json({
+    message: "success",
+    name: "saravana",
+    company: "zoho",
+    age: 26,
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
 });
